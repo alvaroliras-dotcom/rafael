@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafael Fernández García-Andrade · Psiquiatra · Madrid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F4EF; --ink: #1A1814; --ink-light: #4A4640;
+    --ink-muted: #8A857E; --rule: #D8D2C8;
+    --accent: #7A8C7E;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --max: 1200px;
+    --prose-max: 650px;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 16.5px; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 2rem; background: rgba(247,244,239,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+  nav.scrolled { border-bottom-color: var(--rule); }
+  .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 400; letter-spacing: 0.06em; color: var(--ink); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; flex-shrink: 0; }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 6px; flex-shrink: 0; }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .nav-mobile { display: none; position: fixed; inset: 0; z-index: 99; background: var(--cream); flex-direction: column; justify-content: center; align-items: center; gap: 3rem; }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { font-family: var(--serif); font-size: clamp(1.8rem,6vw,2.5rem); font-weight: 300; color: var(--ink); text-decoration: none; transition: opacity 0.2s; }
+  .nav-mobile a:hover { opacity: 0.5; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; padding-top: 5rem; }
+  .hero-text { display: flex; flex-direction: column; justify-content: center; padding: 5rem 3rem 5rem 2rem; max-width: calc(var(--max) / 2); margin-left: auto; }
+  .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2rem; }
+  .hero-name { font-family: var(--serif); font-size: clamp(2.8rem,4vw,4.8rem); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; margin-bottom: 2.25rem; }
+  .hero-name em { font-style: italic; }
+  .hero-divider { width: 3rem; height: 1px; background: var(--ink-muted); margin-bottom: 2.25rem; }
+  .hero-body p { font-size: 0.97rem; line-height: 1.9; color: var(--ink-light); margin-bottom: 1.35rem; max-width: var(--prose-max); }
+  .hero-image { overflow: hidden; }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+
+  /* SECCIONES */
+  section { padding: 7rem 2rem; border-top: 1px solid var(--rule); }
+  .section-label { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 3.5rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; width: 2.5rem; height: 1px; background: var(--rule); }
+  .section-h2 { font-family: var(--serif); font-size: clamp(2rem,3vw,3.4rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 2.75rem; }
+  .section-h2 em { font-style: italic; }
+
+  blockquote.pull-quote { font-family: var(--serif); font-size: clamp(1.45rem,2.2vw,2.1rem); font-style: italic; font-weight: 300; line-height: 1.4; color: var(--ink); border-left: 2px solid var(--accent); padding: 1rem 0 1rem 2rem; margin: 3rem 0; max-width: 42ch; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+  .grid2-equal { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .sticky-head { position: sticky; top: 8rem; }
+
+  .prose p { font-size: 0.97rem; line-height: 1.9; color: var(--ink-light); margin-bottom: 1.6rem; max-width: var(--prose-max); }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose ul { list-style: none; margin: 0.5rem 0 1.6rem; max-width: var(--prose-max); }
+  .prose ul li { font-size: 0.97rem; color: var(--ink-light); line-height: 1.9; padding: 0.6rem 0; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 0.75rem; }
+  .prose ul li::before { content: ''; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+  .pub-item { font-size: 0.9rem; color: var(--ink-light); padding: 0.9rem 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 0.2rem; }
+  .pub-item span { font-style: italic; color: var(--ink-muted); font-size: 0.82rem; }
+  .premio-item { font-size: 0.9rem; color: var(--ink-light); padding: 0.75rem 0; border-bottom: 1px solid var(--rule); line-height: 1.6; }
+  .pub-subsection-title { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); margin: 2rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+
+  /* PHOTO BREAK - sin parallax, encuadre fijo */
+  .photo-break { width: 100%; overflow: hidden; border-top: 1px solid var(--rule); }
+  .photo-break img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-break.tall { height: 480px; }
+  .photo-break.medium { height: 380px; }
+
+  /* GALERÍA CONSULTA */
+  .consulta-gallery { display: flex; flex-direction: column; gap: 0.75rem; }
+  .consulta-gallery-main { overflow: hidden; aspect-ratio: 2/3; cursor: pointer; }
+  .consulta-gallery-main img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+  .consulta-gallery-main:hover img { transform: scale(1.03); }
+  .consulta-gallery-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  .consulta-gallery-thumbs .thumb { overflow: hidden; aspect-ratio: 1; cursor: pointer; }
+  .consulta-gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.4s ease; }
+  .consulta-gallery-thumbs .thumb:hover img { transform: scale(1.05); }
+
+  /* LIGHTBOX */
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(26,24,20,0.95); justify-content: center; align-items: center; padding: 2rem; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
+  .lightbox-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: rgba(247,244,239,0.7); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
+  .lightbox-close:hover { color: var(--cream); }
+  .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(247,244,239,0.6); font-size: 2rem; cursor: pointer; padding: 1rem; transition: color 0.2s; }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { color: var(--cream); }
+
+  /* RAFA FOTO */
+  .rafa-foto { width: 100%; overflow: hidden; margin-top: 2rem; }
+  .rafa-foto img { width: 100%; display: block; }
+
+  /* CONSULTA DARK */
+  .consulta { background: var(--ink); color: var(--cream); }
+  .consulta .section-label { color: rgba(247,244,239,0.35); }
+  .consulta .section-label::after { background: rgba(247,244,239,0.15); }
+  .consulta .section-h2 { color: var(--cream); }
+  .consulta .prose p { color: rgba(247,244,239,0.65); }
+  .consulta .prose ul li { color: rgba(247,244,239,0.7); border-bottom-color: rgba(247,244,239,0.1); }
+  .consulta .prose ul li::before { background: rgba(247,244,239,0.35); }
+  .consulta blockquote.pull-quote { color: var(--cream); border-left-color: rgba(122,140,126,0.5); }
+  .consulta-nota { font-size: 0.83rem; color: rgba(247,244,239,0.38); border-top: 1px solid rgba(247,244,239,0.1); padding-top: 1.5rem; margin-top: 2rem; line-height: 1.75; }
+
+  /* DOCENCIA */
+  .docencia { background: #F0EDE7; }
+  .docencia-stats { display: flex; flex-direction: column; }
+  .stat { border-top: 1px solid var(--rule); padding: 1.75rem 0; }
+  .stat-number { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+
+  /* CONTACTO */
+  .contacto { text-align: center; }
+  .contacto .section-label { justify-content: center; }
+  .contacto .wrap { max-width: 640px; }
+  .contacto-intro { font-size: 1rem; color: var(--ink-light); line-height: 1.85; margin-bottom: 3rem; }
+  .contacto-btns { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .btn-contact { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 0.2rem; transition: gap 0.3s; }
+  .btn-contact:hover { gap: 1rem; }
+  .btn-contact::after { content: '→'; font-family: var(--sans); font-size: 0.85rem; }
+  .contacto-tel-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem; }
+  .contacto-tel { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--ink); text-decoration: none; letter-spacing: 0.05em; display: inline-block; transition: opacity 0.2s; }
+  .contacto-tel:hover { opacity: 0.6; }
+
+  footer { padding: 1.75rem 2rem; border-top: 1px solid var(--rule); }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .footer-name { font-family: var(--serif); font-size: 0.9rem; color: var(--ink-muted); }
+  .footer-credit { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--ink-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-credit:hover { color: var(--ink); }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-name { font-size: 0.82rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-text { padding: 6rem 1.25rem 2.5rem; max-width: 100%; margin: 0; }
+    .hero-image { height: 75vw; }
+    section { padding: 4.5rem 1.25rem; }
+    .grid2, .grid2-equal { grid-template-columns: 1fr; gap: 2.5rem; }
+    .sticky-head { position: static; }
+    .rafa-foto { max-width: 260px; }
+    .photo-break { height: 55vw; min-height: 220px; }
+    .photo-break.short { height: 45vw; min-height: 180px; }
+    blockquote.pull-quote { padding-left: 1.25rem; font-size: 1.2rem; }
+    footer .wrap { flex-direction: column; gap: 0.75rem; text-align: center; }
+    .contacto-btns { flex-direction: column; align-items: center; }
+    .consulta-gallery-main { aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-name">Rafael Fernández García-Andrade</a>
+    <ul class="nav-links">
+      <li><a href="#como-trabajo">Cómo trabajo</a></li>
+      <li><a href="#trayectoria">Trayectoria</a></li>
+      <li><a href="#publicaciones">Publicaciones</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile">
+  <a href="#como-trabajo" class="nav-mobile-link">Cómo trabajo</a>
+  <a href="#trayectoria" class="nav-mobile-link">Trayectoria</a>
+  <a href="#publicaciones" class="nav-mobile-link">Publicaciones</a>
+  <a href="#contacto" class="nav-mobile-link">Contacto</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">×</button>
+  <button class="lightbox-prev" id="lbPrev">‹</button>
+  <img src="" alt="" id="lbImg">
+  <button class="lightbox-next" id="lbNext">›</button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio" style="border-top:none;">
+  <div class="hero-text fade-in">
+    <p class="hero-eyebrow">Psiquiatra · Madrid</p>
+    <h1 class="hero-name">Rafael<br>Fernández<br><em>García-Andrade</em></h1>
+    <div class="hero-divider"></div>
+    <div class="hero-body">
+      <p>Desarrollo mi actividad clínica en el Hospital Clínico San Carlos de Madrid desde hace más de quince años, en un entorno donde es habitual trabajar con situaciones psiquiátricas complejas y pacientes especialmente vulnerables.</p>
+      <p>Desde hace años coordino también el Equipo de Calle de Salud Mental de Madrid, un dispositivo orientado a la atención de personas con trastornos mentales graves que viven fuera de los circuitos habituales de asistencia sanitaria.</p>
+      <p>Ese trabajo ha marcado de forma importante mi manera de entender la psiquiatría. No solo desde el diagnóstico o la medicación, sino también desde el contexto en el que vive cada persona y desde las dificultades reales que muchas veces rodean al sufrimiento mental.</p>
+      <p>Además de la actividad clínica, participo en docencia universitaria e investigación en el ámbito de la psiquiatría y las neurociencias.</p>
+      <p>Mi consulta privada mantiene la misma forma de trabajo que desarrollo en el ámbito hospitalario: una psiquiatría basada en la escucha, el criterio clínico y una evaluación individualizada de cada situación.</p>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="img/rafa-hero.jpg" alt="Rafael Fernández García-Andrade · Psiquiatra">
+  </div>
+</section>
+
+<!-- SEPARADOR 1: MONOS -->
+<div class="photo-break tall fade-in">
+  <img src="img/monos.jpg" alt="Entrada a la consulta" style="object-position: center 88%; height: 480px;">
+</div>
+
+<!-- COMO TRABAJO -->
+<section id="como-trabajo">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="sticky-head fade-in">
+        <p class="section-label">Método</p>
+        <h2 class="section-h2">Cómo<br><em>trabajo</em></h2>
+      </div>
+      <div class="prose fade-in">
+        <p>La psiquiatría rara vez funciona bien cuando se reduce únicamente a síntomas, etiquetas diagnósticas o respuestas automáticas.</p>
+        <p>Muchas veces lo importante es entender cómo ha llegado una persona a una determinada situación, qué factores están interviniendo y qué tipo de intervención puede ser realmente útil en ese momento concreto.</p>
+        <p>No todas las situaciones requieren actuar de la misma manera. Hay momentos donde es necesario intervenir con más rapidez y otros donde lo importante es escuchar, ordenar lo que está ocurriendo y entender mejor el contexto antes de sacar conclusiones.</p>
+        <blockquote class="pull-quote">«Parte del trabajo clínico consiste también en poder hablar de situaciones difíciles sin dramatizarlas innecesariamente y sin convertir al paciente en un diagnóstico.»</blockquote>
+        <p>La experiencia acumulada durante años en el ámbito hospitalario, en dispositivos de atención comunitaria y en contextos especialmente complejos ha influido directamente en mi forma de trabajar.</p>
+        <p>Eso implica convivir habitualmente con:</p>
+        <ul>
+          <li>sufrimiento mental grave</li>
+          <li>situaciones de crisis</li>
+          <li>pacientes en momentos de gran vulnerabilidad</li>
+          <li>procesos que no siempre evolucionan de manera previsible</li>
+        </ul>
+        <p>En consulta, el objetivo no es únicamente reducir síntomas. También es construir un espacio donde la persona pueda explicar lo que le ocurre con normalidad y sin sentirse juzgada o simplificada.</p>
+        <p>La medicación, cuando se utiliza, forma parte de una estrategia clínica más amplia. No se plantea como una respuesta automática, sino como una herramienta que debe ajustarse cuidadosamente a cada situación y a cada paciente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARADOR 2: MADRID CALLE BN -->
+<div class="photo-break medium fade-in">
+  <img src="img/madrid-calle.jpg" alt="Madrid" style="object-position: center 40%; height: 380px;">
+</div>
+
+<!-- CONSULTA PRIVADA -->
+<section class="consulta" id="consulta" style="border-top:none;">
+  <div class="wrap">
+    <div class="grid2-equal">
+      <div class="fade-in">
+        <p class="section-label">Consulta privada</p>
+        <h2 class="section-h2">Un espacio<br>para <em>ordenar</em><br>lo que ocurre</h2>
+        <div class="prose">
+          <p>La consulta privada permite trabajar determinadas situaciones con más tiempo, continuidad y seguimiento individualizado.</p>
+          <p>La primera parte del proceso suele centrarse en comprender con detalle qué está ocurriendo, cómo ha evolucionado la situación y qué factores pueden estar influyendo en ella.</p>
+          <blockquote class="pull-quote">«No siempre existe una explicación inmediata. Y no todos los problemas se resuelven de la misma forma.»</blockquote>
+          <p>En muchos casos, parte del trabajo consiste precisamente en ordenar situaciones que llevan tiempo generando sufrimiento o desgaste:</p>
+          <ul>
+            <li>cambios en el estado de ánimo</li>
+            <li>dificultades persistentes</li>
+            <li>sensación de agotamiento</li>
+            <li>problemas relacionales</li>
+            <li>bloqueos</li>
+            <li>procesos de crisis</li>
+            <li>situaciones que se han ido complicando con el tiempo</li>
+          </ul>
+          <p>La experiencia clínica en contextos complejos ha reforzado una forma de trabajo basada más en comprender cada caso concreto que en aplicar esquemas rígidos o soluciones rápidas.</p>
+          <p>Eso incluye también valorar cuidadosamente cuándo una intervención puede ayudar y cuándo determinadas decisiones necesitan más tiempo o más observación.</p>
+          <p class="consulta-nota">La consulta se desarrolla exclusivamente con pacientes privados y sin intermediación de aseguradoras, con el objetivo de mantener independencia clínica, continuidad y tiempo suficiente en el seguimiento.</p>
+        </div>
+      </div>
+      <div class="consulta-gallery fade-in">
+        <div class="consulta-gallery-main" data-src="img/consulta-principal.jpg" data-index="0">
+          <img src="img/consulta-principal.jpg" alt="Consulta">
+        </div>
+        <div class="consulta-gallery-thumbs">
+          <div class="thumb" data-src="img/consulta-full-1.jpg" data-index="1">
+            <img src="img/consulta-thumb-1.jpg" alt="Consulta detalle 1">
+          </div>
+          <div class="thumb" data-src="img/consulta-full-2.jpg" data-index="2">
+            <img src="img/consulta-thumb-2.jpg" alt="Consulta detalle 2">
+          </div>
+          <div class="thumb" data-src="img/consulta-full-3.jpg" data-index="3">
+            <img src="img/consulta-thumb-3.jpg" alt="Consulta detalle 3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAYECTORIA -->
+<section id="trayectoria">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="sticky-head fade-in">
+        <p class="section-label">Recorrido</p>
+        <h2 class="section-h2">Trayec<em>toria</em></h2>
+        <div class="rafa-foto">
+          <img src="img/rafa-despacho.jpg" alt="Rafael Fernández García-Andrade">
+        </div>
+      </div>
+      <div class="prose fade-in">
+        <p>Soy médico especialista en Psiquiatría y Doctor en Neurociencias por la Universidad Complutense de Madrid, con calificación Cum Laude.</p>
+        <p>Desarrollo mi actividad clínica en el Hospital Clínico San Carlos de Madrid desde 2010, trabajando de forma continuada en el ámbito de la psiquiatría hospitalaria pública.</p>
+        <p>Una parte especialmente importante de mi trayectoria ha sido la coordinación del Equipo de Calle de Salud Mental de Madrid, un dispositivo dedicado a la atención de personas sin hogar con trastornos mentales graves.</p>
+        <blockquote class="pull-quote">«Este trabajo implica intervenir en entornos no estructurados, muchas veces alejados de los circuitos convencionales de atención sanitaria, y abordar situaciones donde los problemas psiquiátricos aparecen estrechamente ligados a factores sociales, económicos y familiares.»</blockquote>
+        <p>He participado también como consultor psiquiátrico en Instituciones Penitenciarias, trabajando en contextos donde los aspectos clínicos, sociales y legales suelen entremezclarse de forma compleja.</p>
+        <p>En paralelo a la actividad asistencial, mantengo una dedicación continuada a la docencia universitaria y a la formación de médicos residentes.</p>
+        <p>Soy Profesor Asociado en la Facultad de Medicina de la Universidad Complutense de Madrid, donde imparto docencia en el ámbito de la Psiquiatría y la Psiquiatría Forense.</p>
+        <p>Mi actividad profesional combina práctica clínica, trabajo comunitario, docencia e investigación, manteniendo siempre una orientación principalmente asistencial y clínica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARADOR 3: HOSPITAL -->
+<div class="photo-break medium fade-in">
+  <img src="img/hospital-nuevo.jpg" alt="Hospital Clínico San Carlos" style="object-position: center 50%; height: 380px;">
+</div>
+
+<!-- DOCENCIA E INVESTIGACIÓN -->
+<section class="docencia" id="docencia" style="border-top:none;">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="sticky-head fade-in">
+        <p class="section-label">Docencia e investigación</p>
+        <h2 class="section-h2">Más allá<br>de la <em>consulta</em></h2>
+        <div class="docencia-stats" style="margin-top:2.5rem;">
+          <div class="stat"><div class="stat-number">+15</div><div class="stat-label">Años en el Hospital Clínico San Carlos</div></div>
+          <div class="stat"><div class="stat-number">UCM</div><div class="stat-label">Profesor Asociado · Facultad de Medicina</div></div>
+          <div class="stat"><div class="stat-number">CL</div><div class="stat-label">Cum Laude · Doctor en Neurociencias</div></div>
+        </div>
+      </div>
+      <div class="prose fade-in">
+        <p>La actividad académica forma parte de mi trayectoria desde hace años.</p>
+        <p>Participo como docente en la Universidad Complutense de Madrid, tanto en el Grado de Medicina como en programas relacionados con la psiquiatría forense y las neurociencias.</p>
+        <p>Además de la formación de estudiantes, colaboro en la docencia y supervisión de médicos residentes y profesionales en formación dentro del ámbito de la salud mental.</p>
+        <p>Mi investigación se ha desarrollado principalmente en áreas relacionadas con las psicosis, los trastornos complejos y distintos aspectos clínicos de la psiquiatría.</p>
+        <p>He colaborado en publicaciones científicas nacionales e internacionales y participo en proyectos vinculados al Instituto de Investigación Sanitaria del Hospital Clínico San Carlos.</p>
+        <blockquote class="pull-quote">«La actividad investigadora y la práctica clínica forman parte de un mismo trabajo: mantener una actualización constante y revisar críticamente la forma en que se entienden y se abordan los problemas de salud mental.»</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICACIONES -->
+<section id="publicaciones">
+  <div class="wrap">
+    <div class="grid2">
+      <div class="sticky-head fade-in">
+        <p class="section-label">Textos y reconocimientos</p>
+        <h2 class="section-h2">Publi<em>caciones</em></h2>
+      </div>
+      <div class="prose fade-in">
+        <p>Soy autor de más de quince publicaciones científicas en revistas nacionales e internacionales, en los ámbitos de la psiquiatría clínica, la psiquiatría forense y las neurociencias. Mi investigación se ha centrado especialmente en los primeros episodios psicóticos, los trastornos de personalidad, la conducta delictiva en personas con trastorno mental grave y la valoración del riesgo.</p>
+        <p class="pub-subsection-title">Selección de publicaciones</p>
+        <div class="pub-item">Mental illness and social exclusion: assessment of the risk of violence after release<span>2020</span></div>
+        <div class="pub-item">Neuropsychological findings in recent onset schizophrenia and borderline personality disorder<span>Actas Españolas de Psiquiatría · 2019</span></div>
+        <div class="pub-item">Valoración psiquiátrico-forense del riesgo de radicalización terrorista en el enfermo mental<span>Revista Española de Medicina Legal · 2019</span></div>
+        <div class="pub-item">Conducta delictiva en las personas sin hogar con trastorno mental grave<span>Revista Española de Medicina Legal · 2018</span></div>
+        <div class="pub-item">Protocolo breve de evaluación del suicidio: fiabilidad interexaminadores<span>Revista de Psiquiatría y Salud Mental · 2012</span></div>
+        <div class="pub-item">Diagnostic features of the cycloid psychoses in a first psychotic episode sample<span>Journal of Affective Disorders · 2011</span></div>
+        <p class="pub-subsection-title">Reconocimientos</p>
+        <div class="premio-item">Primer Premio al mejor trabajo de investigación durante la residencia. <em>Sociedad Española de Psiquiatría Biológica</em> · 2008</div>
+        <div class="premio-item">Primer Premio en la categoría Profesionales Sanitarios. <em>Fundación Española de Psiquiatría y Salud Mental</em> · 2014</div>
+        <div class="premio-item">Premio del Ayuntamiento de Madrid por la labor del Equipo de Calle de Salud Mental · 2014</div>
+        <div class="premio-item">Premio a la Excelencia de la Fundación Caser por el trabajo en el Equipo de Calle · 2017</div>
+        <div class="premio-item">Premio Albert Jovell al Mejor Programa de Intervención Dirigido a Pacientes · 2018</div>
+        <p style="margin-top:2rem;font-size:0.85rem;color:var(--ink-muted);">Lista completa disponible en el Portal de la Investigación de la UCM y en ResearchGate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="wrap fade-in">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-h2" style="font-size:clamp(2.5rem,4vw,4rem);margin-bottom:1.5rem;">Consulta<br><em>privada</em><br>en Madrid</h2>
+    <p class="contacto-intro">El contacto puede realizarse por correo electrónico o por teléfono. A partir de una primera comunicación, se valorará la posibilidad de concertar una cita presencial o telemática en función de cada situación.</p>
+    <div class="contacto-btns">
+      <a href="mailto:contacto@rafaelpsiquiatra.es" class="btn-contact">Correo electrónico</a>
+      <a href="mailto:contacto@rafaelpsiquiatra.es" class="btn-contact">Solicitar información</a>
+    </div>
+    <p class="contacto-tel-label">Teléfono de consulta</p>
+    <a href="tel:+34630767166" class="contacto-tel">630 76 71 66</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="footer-name">Rafael Fernández García-Andrade · Psiquiatra · Madrid</span>
+    <a href="https://elgordoyelflaco.es" target="_blank" rel="noopener" class="footer-credit">Web realizada por El Gordo y el Flaco →</a>
+  </div>
+</footer>
+
+<script>
+// NAV
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+const toggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('navMobile');
+toggle.addEventListener('click', () => {
+  const open = toggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+document.querySelectorAll('.nav-mobile-link').forEach(a => {
+  a.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// FADE IN
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Parallax eliminado - encuadres fijos
+
+// LIGHTBOX
+const lbSrcs = [
+  'img/consulta-principal.jpg',
+  'img/consulta-full-1.jpg',
+  'img/consulta-full-2.jpg',
+  'img/consulta-full-3.jpg'
+];
+let lbIdx = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+
+function lbOpen(idx) {
+  lbIdx = idx;
+  lbImg.src = lbSrcs[lbIdx];
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function lbClose() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbGo(dir) {
+  lbIdx = (lbIdx + dir + lbSrcs.length) % lbSrcs.length;
+  lbImg.src = lbSrcs[lbIdx];
+}
+
+document.getElementById('lbClose').addEventListener('click', lbClose);
+document.getElementById('lbPrev').addEventListener('click', () => lbGo(-1));
+document.getElementById('lbNext').addEventListener('click', () => lbGo(1));
+lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lbClose();
+  if (e.key === 'ArrowLeft') lbGo(-1);
+  if (e.key === 'ArrowRight') lbGo(1);
+});
+
+document.querySelector('.consulta-gallery-main').addEventListener('click', function() {
+  lbOpen(parseInt(this.dataset.index));
+});
+document.querySelectorAll('.consulta-gallery-thumbs .thumb').forEach(el => {
+  el.addEventListener('click', function() { lbOpen(parseInt(this.dataset.index)); });
+});
+</script>
+</body>
+</html>
