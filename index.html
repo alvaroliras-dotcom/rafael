@@ -136,6 +136,9 @@
   .contacto-tel-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem; }
   .contacto-tel { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--ink); text-decoration: none; letter-spacing: 0.05em; display: inline-block; transition: opacity 0.2s; }
   .contacto-tel:hover { opacity: 0.6; }
+  .contacto-mail { font-family: var(--serif); font-size: 1.35rem; font-weight: 300; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; display: inline-block; transition: opacity 0.2s; word-break: break-word; }
+  .contacto-mail:hover { opacity: 0.6; }
+  .contacto-datos { display: flex; flex-direction: column; gap: 2rem; align-items: center; margin-top: 0.5rem; }
 
   footer { padding: 1.75rem 2rem; border-top: 1px solid var(--rule); }
   footer .wrap { display: flex; justify-content: space-between; align-items: center; }
@@ -396,8 +399,16 @@
       <a href="mailto:rfga1313@hotmail.com?subject=Consulta%20web%20%E2%80%94%20Dr.%20Rafael%20Fern%C3%A1ndez%20Garc%C3%ADa-Andrade" class="btn-contact">Correo electrónico</a>
       <a href="mailto:rfga1313@hotmail.com?subject=Solicitud%20de%20informaci%C3%B3n%20%E2%80%94%20Consulta&body=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20consulta." class="btn-contact">Solicitar información</a>
     </div>
-    <p class="contacto-tel-label">Teléfono de consulta</p>
-    <a href="tel:+34630767166" class="contacto-tel">630 76 71 66</a>
+    <div class="contacto-datos">
+      <div>
+        <p class="contacto-tel-label">Correo electrónico</p>
+        <a href="mailto:rfga1313@hotmail.com" class="contacto-mail">rfga1313@hotmail.com</a>
+      </div>
+      <div>
+        <p class="contacto-tel-label">Teléfono de consulta</p>
+        <a href="tel:+34630767166" class="contacto-tel">630 76 71 66</a>
+      </div>
+    </div>
   </div>
 </section>
 
